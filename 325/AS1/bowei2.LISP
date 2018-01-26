@@ -1,0 +1,25 @@
+;QUESTION 1:
+;test cases:
+;(xmember '1 '(1))
+;(xmember '1 '( (1) 2 3))
+;(xmember '(1) '((1) 2 3))
+;(print (eq '(1) (car '((1) 2 3))))
+;(print( car'((1))))
+(defun xmember ( X Y )
+
+  (if (equal X (car Y))
+      (print "T")
+      (if (equal nil (cdr '(Y)))
+        (print "F")
+        (xmember (X cdr '(Y)))))
+        
+)
+
+;QUESTION 2:
+;test cases:
+(print (atom (car'(1 2))))
+(print (car'(1 2)))
+(print (atom 1))
+(print (caar '(1)))
+;(defun flatten X
+  
