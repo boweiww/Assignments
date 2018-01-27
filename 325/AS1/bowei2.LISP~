@@ -1,20 +1,55 @@
-;QUESTION 1:
+;Question 1:
 ;test cases:
 ;(xmember '1 '(1))
 ;(xmember '1 '( (1) 2 3))
 ;(xmember '(1) '((1) 2 3))
 ;(print (eq '(1) (car '((1) 2 3))))
-;(print( car'((1))))
-(defun xmember ( X Y )
 
-  (if (equal X (car Y))
-      (print "T")
-      (if (equal nil (cdr '(Y)))
-        (print "F")
-        (xmember (X cdr '(Y)))))
+(print(xmember nil nil))
+(print(xmember nil '(nil)))
+;(print(xmember (nil '((ni)))))
+;(print(xmember ('(nil) '(1 2 3 (nil)))))
+;(print(xmember ('(nil) '(nil))))
+
+(defun xmember  (X Y )
+	(cond 		
+		((equal Y nil) nil)
+		((null Y) nil)
+		((equal (car Y) X) T)
+		(t (xmember X (cdr Y)))
         
 )
+;Question 2:
+;Test Cases:
+(print(flatten '(1 (2) 3)))
+(print(flatten '((((a))))))
+(print(flatten '(a (b c) (d ((e)) f))))
 
-;QUESTION 2:
-;test cases:
-(print (atom (1 2)))
+(defun flatten (x)
+    (cond
+        ((null x) x)
+        ((atom (car x)) (cons (car x) (flatten (cdr x))))
+        (t (append (flatten (car x)) (flatten (cdr x))))
+    )
+)
+
+;Qustion 3:
+
+
+(defun remove-duplicate (x)
+	(cond
+		((null x) x)
+		((equal (compare (car x) (cdr x)) F) (cons (car x)(remove-duplicate (cdr x))))
+		(t (remove-duplicate (cdr x)))
+	)
+)
+
+(defun compare(x y)
+	(cond
+		((null y) F)
+		((equal x (car '(y))) T)
+		(t compare(x  (cdr y)))
+	)
+)
+		 
+			
