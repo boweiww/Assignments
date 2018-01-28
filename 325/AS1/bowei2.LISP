@@ -5,12 +5,6 @@
 ;(xmember '(1) '((1) 2 3))
 ;(print (eq '(1) (car '((1) 2 3))))
 
-(print(xmember nil nil))
-(print(xmember nil '(nil)))
-(print(xmember nil '((nil)) ))
-(print(xmember '(nil) '(1 2 3 (nil))))
-(print(xmember '(nil) '(nil)))
-
 (defun xmember  (X Y )
 	(cond 		
 		((equal Y nil) nil)
@@ -20,6 +14,14 @@
                 )
         
 )
+;Test Cases:
+
+(print(xmember nil nil))
+(print(xmember nil '(nil)))
+(print(xmember nil '((nil)) ))
+(print(xmember '(nil) '(1 2 3 (nil))))
+(print(xmember '(nil) '(nil)))
+
 ;Question 2:
 ;Test Cases:
 
@@ -78,13 +80,37 @@
 (print(mix '(1 2 3) '(nil)))
 			
 ;Qustion 5:
-(defun filter(x)
+(defun filter(x y)
+        ;(print x)
+        ;(print y)
+        (cond
+                ;(t (print 2222))
+		((null y) y)
+		((equal nil (cdr y)) (list x (append x y)))
+		(t (append (filter (append x (list(car y))) (cdr y)) (filter x (cdr y))))
+                )
+)
+(defun subsets(x)
 	(cond
-		((null x) x)
-		
+               
+                ;((equal nil x) (list nil))
+		((equal nil (cdr x)) (list x))
+		( t (append  (subsets (cdr x)) (filter (list(car x)) (cdr x))))
+                )
+)
 (defun allsubsets (x)
-	
-		
+  (cond
+        ((equal nil x) (list nil))
+        (t (append  (subsets x) (list nil)))
+        )
+)
+;Test cases:
+(print(allsubsets nil))
+;(print(equal nil (cdr '(a))))
+(print(allsubsets '(a)))
+(print(allsubsets '(a b c d)))
+(print(cdr '(1 2)))
 
-
-
+;Question 6
+;order not matter
+;self refer self is not useful
